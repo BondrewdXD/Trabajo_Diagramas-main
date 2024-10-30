@@ -1,0 +1,47 @@
+@startuml Tiempo
+title Diagrama de Tiempo del Sistema de Restaurante
+
+participant Cliente
+participant Sistema
+participant Camarero
+participant Dueño
+
+Cliente -> Sistema : SeleccionaMesa() 
+note right of Cliente : t1: Selecciona mesa
+Cliente -> Sistema : EligeServicio(tipo) 
+note right of Cliente : t2: Elige servicio
+
+alt Comer en el restaurante
+    Cliente -> Sistema : EscogeComida() 
+    note right of Cliente : t3: Escoge comida
+    alt ¿Desea sopa?
+        Cliente -> Sistema : SeleccionaSopa() 
+        note right of Cliente : t4: Selecciona sopa
+    else
+        Cliente -> Sistema : NoSeleccionaSopa()
+        note right of Cliente : t4: No selecciona sopa
+    end
+    alt ¿Desea postre?
+        Cliente -> Sistema : SeleccionaPostre() 
+        note right of Cliente : t5: Selecciona postre
+    else
+        Cliente -> Sistema : NoSeleccionaPostre()
+        note right of Cliente : t5: No selecciona postre
+    end
+else Para llevar
+    Cliente -> Sistema : EscogeComidaParaLlevar() 
+    note right of Cliente : t6: Escoge comida para llevar
+end
+
+Cliente -> Sistema : RealizaPedido() 
+note right of Cliente : t7: Realiza pedido
+Sistema -> Camarero : TomaPedido() 
+note right of Sistema : t8: Toma pedido
+Camarero -> Cliente : SirveOrden() 
+note right of Camarero : t9: Sirve orden
+Sistema -> Cliente : GeneraFactura() 
+note right of Sistema : t10: Genera factura
+Sistema -> Dueño : EnviaFacturaDetallada() 
+note right of Sistema : t11: Envia factura detallada
+
+@enduml

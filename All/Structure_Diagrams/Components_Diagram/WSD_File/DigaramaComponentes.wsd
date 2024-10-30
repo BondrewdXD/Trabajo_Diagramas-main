@@ -1,0 +1,17 @@
+@startuml Componentes
+
+package "Sistema de Restaurante" {
+    
+    [PlatoService] --> [BaseDeDatos] : consulta y actualiza platos
+    [OrdenService] --> [BaseDeDatos] : consulta y actualiza órdenes
+    [DetalleOrdenService] --> [BaseDeDatos] : consulta y actualiza detalles de órdenes
+    [UsuarioService] --> [BaseDeDatos] : consulta y actualiza usuarios
+    [FacturaService] --> [BaseDeDatos] : consulta y actualiza facturas
+
+    [PlatoService] --> [DetalleOrdenService] : proporciona información del plato
+    [OrdenService] --> [DetalleOrdenService] : agrega detalles a la orden
+    [OrdenService] --> [FacturaService] : genera factura
+    [UsuarioService] --> [OrdenService] : usuario realiza una orden
+}
+
+@enduml

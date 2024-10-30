@@ -1,0 +1,58 @@
+@startuml Perfil
+
+entity "Plato" {
+    + ID_Plato : int
+    + Nombre : string
+    + Descripción : string
+    + Precio : decimal
+    + Foto : string (URL)
+}
+
+entity "Orden" {
+    + ID_Orden : int
+    + ID_Mesa : int
+    + HoraPedido : datetime
+    + Total : decimal
+}
+
+entity "Detalle_Orden" {
+    + ID_Detalle : int
+    + ID_Orden : int
+    + ID_Plato : int
+    + Cantidad : int
+    + Sopa : boolean
+    + Postre : boolean
+    + Domicilio : boolean
+    + Recipiente : boolean
+}
+
+entity "Mesa" {
+    + ID_Mesa : int
+    + Numero_Mesa : int
+    + Capacidad : int
+    + Estado : string ("disponible", "ocupada")
+}
+
+entity "Usuario" {
+    + ID_Usuario : int
+    + Nombre : string
+    + Teléfono : string
+    + Dirección : string
+}
+
+entity "Factura" {
+    + ID_Factura : int
+    + ID_Orden : int
+    + Fecha : date
+    + Total : decimal
+    + MetodoPago : string
+}
+
+
+Orden -- "1..*" Detalle_Orden : contiene >
+Detalle_Orden -- "1" Plato : se refiere >
+Orden -- "1" Mesa : se asigna a >
+Factura -- "1" Orden : está asociada a >
+Usuario -- "1..*" Orden : realiza >
+
+@enduml

@@ -1,0 +1,50 @@
+@startuml Objetos
+
+object plato  {
+    - ID_Plato = 1
+    - Nombre = "Ensalada César"
+    -  Descripción = "Ensalada fresca con pollo y aderezo César"
+    - Precio = 12.50
+    - Foto = "url_foto_ensalada"
+}
+
+object detalleOrden {
+    - ID_Detalle = 1
+    - ID_Orden = 1001
+    - ID_Plato = 1
+    - Cantidad = 2
+    - Sopa = false
+    - Postre = true
+    - Domicilio = false
+}
+
+object orden{
+    - ID_Orden = 1001
+    - ID_Mesa = 1
+    - HoraPedido = "2024-10-30 12:30"
+    - Total = 35.00
+}
+
+object usuario {
+    - ID_Usuario = 1
+    - Nombre = "Juan Pérez"
+    - Teléfono = "123456789"
+    - Dirección = "Calle Falsa 123"
+}
+
+object factura {
+    - ID_Factura = 5001
+    - ID_Orden = 1001
+    - Fecha = "2024-10-30"
+    - Total = 35.00
+    - MetodoPago = "tarjeta de crédito"
+}
+
+plato -- detalleOrden : "es parte de"
+orden -- detalleOrden : "contiene"
+orden -- factura : "genera"
+usuario -- orden : "realiza"
+detalleOrden -- plato : "incluye el plato"
+
+@enduml
+

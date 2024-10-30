@@ -1,0 +1,27 @@
+@startuml Casos_De_Uso
+left to right direction
+actor Cliente
+actor Camarero
+actor "Dueño del Restaurante" as Dueño
+package "Restaurante" {
+    usecase "Seleccionar Mesa" as UC1
+    usecase "Elegir Servicio" as UC2
+    usecase "Escoger Comida" as UC3
+    usecase "Seleccionar Sopa" as UC4
+    usecase "Seleccionar Postre" as UC5
+    usecase "Realizar Pedido" as UC6
+    usecase "Servir Orden" as UC7
+    usecase "Generar Factura" as UC8
+    usecase "Enviar Factura Detallada" as UC9
+
+    Cliente --> UC1
+    Cliente --> UC2
+    Cliente --> UC3
+    UC3 --> UC4 : <<include>>
+    UC3 --> UC5 : <<include>>
+    Cliente --> UC6
+    Camarero --> UC7
+    UC6 --> UC8
+    Dueño --> UC9
+}
+@enduml

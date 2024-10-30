@@ -1,0 +1,32 @@
+@startuml Despliegue
+node "Servidor de Aplicación" {
+    component "PlatoService" 
+    component "OrdenService" 
+    component "DetalleOrdenService"
+    component "UsuarioService"
+    component "FacturaService"
+}
+
+node "Base de Datos" {
+    database "BaseDeDatos" {
+        [Plato]
+        [Detalle_Orden]
+        [Orden]
+        [Mesa]
+        [Usuario]
+        [Factura]
+    }
+}
+
+node "Cliente" {
+    [Interfaz de Usuario]
+}
+
+[Interfaz de Usuario] --> [PlatoService] : realiza peticiones
+[PlatoService] --> [BaseDeDatos] : consulta y actualiza platos
+[OrdenService] --> [BaseDeDatos] : consulta y actualiza órdenes
+[DetalleOrdenService] --> [BaseDeDatos] : consulta y actualiza detalles de órdenes
+[UsuarioService] --> [BaseDeDatos] : consulta y actualiza usuarios
+[FacturaService] --> [BaseDeDatos] : consulta y actualiza facturas
+
+@enduml

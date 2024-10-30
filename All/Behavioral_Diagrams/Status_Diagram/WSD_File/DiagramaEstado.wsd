@@ -1,0 +1,23 @@
+@startuml estado-transicion
+[*] --> SeleccionMesa
+
+SeleccionMesa --> EligeServicio : Mesa seleccionada
+EligeServicio --> EscogeComida : Servicio elegido
+
+EligeServicio --> EscogeComidaParaLlevar : Llevar
+EligeServicio --> EscogeComidaRestaurante : Comer en restaurante
+
+EscogeComidaRestaurante --> EscogeSopa : Comida seleccionada
+EscogeSopa --> EscogePostre : Sopa seleccionada
+EscogeSopa --> RealizaPedido : No sopa
+
+EscogePostre --> RealizaPedido : Postre seleccionado
+EscogePostre --> RealizaPedido : No postre
+
+EscogeComidaParaLlevar --> RealizaPedido : Comida seleccionada para llevar
+
+RealizaPedido --> SirveOrden : Pedido realizado
+SirveOrden --> GeneraFactura : Orden servida
+GeneraFactura --> [*] : Factura generada
+
+@enduml

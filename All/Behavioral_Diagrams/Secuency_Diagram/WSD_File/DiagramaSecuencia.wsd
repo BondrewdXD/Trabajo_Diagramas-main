@@ -1,0 +1,60 @@
+@startuml Secuencia
+actor Cliente
+participant "Sistema de Restaurante" as Sistema
+participant "Dueño del Restaurante" as Dueno
+
+Cliente -> Sistema : Mostrar mesas disponibles
+
+Cliente -> Sistema : Seleccionar mesa (ej. Mesa 1)
+
+Cliente -> Sistema : Elegir tipo de servicio (1: Restaurante, 2: Para llevar)
+Sistema --> Cliente : Confirmar tipo de servicio
+
+alt Servicio en Restaurante
+    Sistema -> Cliente : Mostrar menú del día
+    Cliente -> Sistema : Seleccionar sopa (Sí/No)
+    alt Sopa
+        Sistema -> Cliente : Mostrar opciones de sopa
+        Cliente -> Sistema : Seleccionar sopa
+    end
+
+    Cliente -> Sistema : Seleccionar plato principal
+    Cliente -> Sistema : Seleccionar postre (Sí/No)
+    alt Postre
+        Sistema -> Cliente : Mostrar opciones de postre
+        Cliente -> Sistema : Seleccionar postre
+    end
+
+    Cliente -> Sistema : Confirmar pedido
+    Sistema --> Cliente : Servir pedido
+    Sistema -> Dueno : Generar factura
+    Dueno --> Sistema : Generar factura detallada
+
+else Servicio para llevar
+    Sistema -> Cliente : Mostrar menú del día
+    Cliente -> Sistema : Seleccionar sopa (Sí/No)
+    alt Sopa
+        Sistema -> Cliente : Mostrar opciones de sopa
+        Cliente -> Sistema : Seleccionar sopa
+    end
+
+    Cliente -> Sistema : Seleccionar plato principal
+    Cliente -> Sistema : Seleccionar postre (Sí/No)
+    alt Postre
+        Sistema -> Cliente : Mostrar opciones de postre
+        Cliente -> Sistema : Seleccionar postre
+    end
+
+    Cliente -> Sistema : Preguntar por desechables (Sí/No)
+    alt Desechables
+        Sistema -> Cliente : Costo adicional por desechables
+    else
+        Sistema -> Cliente : Sin costo adicional
+    end
+
+    Cliente -> Sistema : Confirmar pedido
+    Sistema --> Cliente : Preparar pedido para llevar
+    Sistema -> Dueno : Generar factura
+    Dueno --> Sistema : Generar factura detallada
+end
+@enduml

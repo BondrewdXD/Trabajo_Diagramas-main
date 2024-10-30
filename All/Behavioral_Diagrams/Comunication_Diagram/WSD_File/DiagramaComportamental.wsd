@@ -1,0 +1,22 @@
+@startuml Comportamental
+skinparam actorPadding 10
+skinparam rectanglePadding 10
+
+actor Cliente
+actor Camarero
+actor "Dueño del Restaurante" as Dueño
+
+rectangle "Sistema de Pedido" {
+    Cliente -> Sistema : SeleccionaMesa()
+    Cliente -> Sistema : EligeServicio(tipo)
+    Cliente -> Sistema : SeleccionaComida(opciones)
+    Cliente -> Sistema : RealizaPedido()
+
+    Sistema -> Camarero : TomaPedido()
+    Camarero -> Cliente : SirveOrden()
+    Sistema -> Cliente : RecibeOrden()
+    Sistema -> Cliente : GeneraFactura()
+    Sistema -> Dueño : EnviaFacturaDetallada()
+}
+
+@enduml

@@ -1,0 +1,28 @@
+@startuml Actividad
+|Cliente|
+start
+:Decide qué mesa ocupar;
+:Selecciona tipo de servicio;
+if (Comer en el restaurante?) then (sí)
+  :Escoge comida;
+  if (¿Desea sopa?) then (sí)
+    :Selecciona sopa;
+  else (no)
+    :No selecciona sopa;
+  endif
+  if (¿Desea postre?) then (sí)
+    :Selecciona postre;
+  else (no)
+    :No selecciona postre;
+  endif
+else (no)
+  :Selecciona comida para llevar;
+endif
+
+:Ordena;
+:Se le sirve la orden;
+:Genera factura;
+:Factura detallada para el dueño;
+
+stop
+@enduml
