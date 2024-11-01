@@ -78,7 +78,7 @@ Factura  -- Orden : se genera para >
 
 @enduml
 ```
-![clases](All/Class_Diagram.png)
+![clases](Structure_Diagramas/Class_Diagram/IMG/All/Class_Diagram.png)
 ### Diagramas de Componentes
 ---
 ### Diagramas de Despliegue
