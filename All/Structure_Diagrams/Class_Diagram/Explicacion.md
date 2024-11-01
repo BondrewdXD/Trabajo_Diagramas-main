@@ -1,4 +1,4 @@
-# Diagrama UML de Clases para Sistema de Ordenes
+# Diagrama UML de Clases para Sistema de Restaurante
 
 Este documento describe el diagrama de clases que representa el modelo de datos para un sistema de gestión de órdenes en un restaurante.
 
