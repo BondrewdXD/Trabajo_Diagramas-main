@@ -18,5 +18,4 @@ rectangle "Sistema de Pedido" {
     Sistema -> Cliente : GeneraFactura()
     Sistema -> Dueño : EnviaFacturaDetallada()
 }
-
 @enduml

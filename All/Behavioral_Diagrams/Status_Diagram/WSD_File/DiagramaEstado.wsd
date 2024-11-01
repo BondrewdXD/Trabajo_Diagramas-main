@@ -19,5 +19,4 @@ EscogeComidaParaLlevar --> RealizaPedido : Comida seleccionada para llevar
 RealizaPedido --> SirveOrden : Pedido realizado
 SirveOrden --> GeneraFactura : Orden servida
 GeneraFactura --> [*] : Factura generada
-
 @enduml
