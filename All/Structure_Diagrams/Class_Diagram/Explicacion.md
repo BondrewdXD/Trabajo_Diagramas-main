@@ -54,4 +54,3 @@ Este documento describe el diagrama de clases que representa el modelo de datos 
 - **Usuario** o-- **Orden**: Un usuario realiza una o más órdenes.
 - **Factura** -- **Orden**: Una factura se genera para una orden específica.
 
-Este diagrama proporciona una representación clara de las entidades y sus relaciones dentro del sistema de gestión de órdenes.
