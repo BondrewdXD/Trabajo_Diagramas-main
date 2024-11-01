@@ -732,11 +732,367 @@ Este diagrama es esencial para entender cómo interactúan las diferentes entida
 
 ### Diagramas de Componentes
 ---
+```js
+@startuml Componentes
+
+package "Sistema de Restaurante" {
+    
+    [PlatoService] --> [BaseDeDatos] : consulta y actualiza platos
+    [OrdenService] --> [BaseDeDatos] : consulta y actualiza órdenes
+    [DetalleOrdenService] --> [BaseDeDatos] : consulta y actualiza detalles de órdenes
+    [UsuarioService] --> [BaseDeDatos] : consulta y actualiza usuarios
+    [FacturaService] --> [BaseDeDatos] : consulta y actualiza facturas
+
+    [PlatoService] --> [DetalleOrdenService] : proporciona información del plato
+    [OrdenService] --> [DetalleOrdenService] : agrega detalles a la orden
+    [OrdenService] --> [FacturaService] : genera factura
+    [UsuarioService] --> [OrdenService] : usuario realiza una orden
+}
+
+@enduml
+```
+
+![componentes](/All/Images_Diagrams/Componentes.png)
+
+Este diagrama de componentes representa un sistema de restaurante que organiza sus servicios en módulos específicos para gestionar platos, órdenes, detalles de órdenes, usuarios y facturas. A continuación, se detallan los roles y las interacciones entre los componentes:
+
+1. *PlatoService*: se encarga de la gestión de platos (consulta y actualización) en la base de datos. Además, proporciona información del plato a DetalleOrdenService para detallar cada plato en una orden específica.
+
+2. *OrdenService*: maneja las órdenes del sistema. Consulta y actualiza las órdenes en la base de datos. Tiene varias interacciones:
+   - Agrega detalles a la orden mediante DetalleOrdenService.
+   - Colabora con FacturaService para generar la factura de una orden completa.
+   - Recibe órdenes iniciadas por los usuarios a través de UsuarioService.
+
+3. *DetalleOrdenService*: gestiona los detalles de cada orden. Consulta y actualiza los detalles en la base de datos, recibe información de platos desde PlatoService, y permite que OrdenService agregue detalles de cada plato a la orden.
+
+4. *UsuarioService*: se encarga de la administración de los usuarios en la base de datos y permite que los usuarios realicen órdenes, las cuales se envían a OrdenService.
+
+5. *FacturaService*: consulta y actualiza las facturas en la base de datos y trabaja en colaboración con OrdenService para generar la factura cuando se completa una orden.
+
 ### Diagramas de Despliegue
 ---
+```js
+@startuml Despliegue
+node "Servidor de Aplicación" {
+    component "PlatoService" 
+    component "OrdenService" 
+    component "DetalleOrdenService"
+    component "UsuarioService"
+    component "FacturaService"
+}
+
+node "Base de Datos" {
+    database "BaseDeDatos" {
+        [Plato]
+        [Detalle_Orden]
+        [Orden]
+        [Mesa]
+        [Usuario]
+        [Factura]
+    }
+}
+
+node "Cliente" {
+    [Interfaz de Usuario]
+}
+
+[Interfaz de Usuario] --> [PlatoService] : realiza peticiones
+[PlatoService] --> [BaseDeDatos] : consulta y actualiza platos
+[OrdenService] --> [BaseDeDatos] : consulta y actualiza órdenes
+[DetalleOrdenService] --> [BaseDeDatos] : consulta y actualiza detalles de órdenes
+[UsuarioService] --> [BaseDeDatos] : consulta y actualiza usuarios
+[FacturaService] --> [BaseDeDatos] : consulta y actualiza facturas
+
+@enduml
+```
+
+
+![despliege](/All/Images_Diagrams/Despliegue.png)
+
+Este diagrama de despliegue muestra cómo los componentes de un sistema de restaurante están distribuidos en diferentes nodos, específicamente un Servidor de Aplicación, una Base de Datos, y un Cliente que representa la interfaz de usuario. Aquí están los detalles de cada nodo y sus interacciones:
+
+- *Servidor de Aplicación*: aloja los servicios principales del sistema. Cada servicio es un componente que maneja distintas funcionalidades del sistema:
+  - PlatoService: consulta y actualiza la información de platos en la base de datos.
+  - OrdenService: gestiona la creación y actualización de órdenes.
+  - DetalleOrdenService: administra los detalles específicos de cada plato en una orden.
+  - UsuarioService: maneja la información de los usuarios.
+  - FacturaService: gestiona la creación y actualización de facturas.
+
+- *Base de Datos*: almacena todas las entidades del sistema en tablas:
+  - *Plato*: tabla con la información de los platos.
+  - *Detalle_Orden*: tabla que almacena los detalles de cada orden.
+  - *Orden*: tabla que guarda las órdenes realizadas.
+  - *Mesa*: tabla para la información sobre las mesas en el restaurante.
+  - *Usuario*: tabla que contiene los datos de los usuarios.
+  - *Factura*: tabla para las facturas generadas.
+
+- *Cliente*: representa la interfaz de usuario a través de la cual los clientes o empleados interactúan con el sistema. La interfaz envía peticiones al PlatoService para acceder o actualizar la información de los platos, y a través de este, puede interactuar con otros servicios del sistema.
+
+### Interacciones
+
+- La Interfaz de Usuario realiza peticiones al PlatoService en el servidor de aplicación.
+- Cada servicio en el Servidor de Aplicación interactúa con la Base de Datos para consultar y actualizar la información correspondiente a sus responsabilidades.
+
 ### Diagramas de Objetos
 ---
+```js
+@startuml Objetos
+
+object plato  {
+    - ID_Plato = 1
+    - Nombre = "Ensalada César"
+    -  Descripción = "Ensalada fresca con pollo y aderezo César"
+    - Precio = 12.50
+    - Foto = "url_foto_ensalada"
+}
+
+object detalleOrden {
+    - ID_Detalle = 1
+    - ID_Orden = 1001
+    - ID_Plato = 1
+    - Cantidad = 2
+    - Sopa = false
+    - Postre = true
+    - Domicilio = false
+}
+
+object orden{
+    - ID_Orden = 1001
+    - ID_Mesa = 1
+    - HoraPedido = "2024-10-30 12:30"
+    - Total = 35.00
+}
+
+object usuario {
+    - ID_Usuario = 1
+    - Nombre = "Juan Pérez"
+    - Teléfono = "123456789"
+    - Dirección = "Calle Falsa 123"
+}
+
+object factura {
+    - ID_Factura = 5001
+    - ID_Orden = 1001
+    - Fecha = "2024-10-30"
+    - Total = 35.00
+    - MetodoPago = "tarjeta de crédito"
+}
+
+plato -- detalleOrden : "es parte de"
+orden -- detalleOrden : "contiene"
+orden -- factura : "genera"
+usuario -- orden : "realiza"
+detalleOrden -- plato : "incluye el plato"
+
+@enduml
+```
+
+![objetos](/All/Images_Diagrams/Objetos.png)
+
+Este diagrama de objetos muestra instancias específicas de las entidades de un sistema de restaurante, con atributos que representan información detallada en un momento dado. A continuación, se describen los objetos y sus relaciones:
+
+1. *plato*: instancia de un plato, en este caso "Ensalada César", con sus atributos:
+   - ID_Plato: identificador único del plato.
+   - Nombre: nombre del plato.
+   - Descripción: breve descripción del plato.
+   - Precio: costo del plato.
+   - Foto: URL de la imagen del plato.
+
+2. *detalleOrden*: representa un detalle específico de una orden, con atributos:
+   - ID_Detalle: identificador único del detalle de la orden.
+   - ID_Orden: identificador de la orden a la que pertenece este detalle.
+   - ID_Plato: identificador del plato específico.
+   - Cantidad: número de platos pedidos.
+   - Sopa, Postre, Domicilio: indican si el detalle incluye sopa, postre o si es un pedido a domicilio.
+
+3. *orden*: instancia de una orden con atributos:
+   - ID_Orden: identificador único de la orden.
+   - ID_Mesa: número de la mesa asociada a la orden.
+   - HoraPedido: momento en que se realizó el pedido.
+   - Total: monto total de la orden.
+
+4. *usuario*: representa a un usuario del sistema, con los atributos:
+   - ID_Usuario: identificador único del usuario.
+   - Nombre, Teléfono, Dirección: información personal del usuario.
+
+5. *factura*: instancia de una factura generada a partir de una orden, con atributos:
+   - ID_Factura: identificador único de la factura.
+   - ID_Orden: identifica la orden a la que está asociada la factura.
+   - Fecha: fecha de emisión de la factura.
+   - Total: monto total facturado.
+   - MetodoPago: método de pago usado por el cliente.
+
+### Relaciones
+
+- detalleOrden es "parte de" orden (la orden contiene los detalles de los platos pedidos).
+- orden "genera" una factura una vez que el pedido está completo.
+- usuario "realiza" una orden.
+- detalleOrden "incluye el plato" específico, en este caso, "Ensalada César".
+
 ### Diagramas de Paquetes
 ---
+```js
+@startuml Paquetes
+package "Modelo" {
+    class Plato {
+        - ID_Plato: int
+        - Nombre: string
+        - Descripción: string
+        - Precio: decimal
+        - Foto: string
+    }
+
+    class Detalle_Orden {
+        - ID_Detalle: int
+        - ID_Orden: int
+        - ID_Plato: int
+        - Cantidad: int
+        - Sopa: boolean
+        - Postre: boolean
+        - Domicilio: boolean
+        - Recipiente: boolean
+    }
+
+    class Orden {
+        - ID_Orden: int
+        - ID_Mesa: int
+        - HoraPedido: datetime
+        - Total: decimal
+    }
+
+    class Mesa {
+        - ID_Mesa: int
+        - Numero_Mesa: int
+        - Capacidad: int
+        - Estado: string
+    }
+
+    class Usuario {
+        - ID_Usuario: int
+        - Nombre: string
+        - Teléfono: string
+        - Dirección: string
+    }
+
+    class Factura {
+        - ID_Factura: int
+        - ID_Orden: int
+        - Fecha: date
+        - Total: decimal
+        - MetodoPago: string
+    }
+}
+
+package "Servicios" {
+    class PlatoService
+    class OrdenService
+    class DetalleOrdenService
+    class UsuarioService
+    class FacturaService
+}
+
+package "Base de Datos" {
+    class Database
+}
+
+"Modelo" --> "Servicios" : utiliza >
+"Servicios" --> "Base de Datos" : accede a >
+"Modelo" --> "Base de Datos" : almacena datos en >
+
+@enduml
+```
+
+![paquetes](/All/Images_Diagrams/Paquetes.png)
+
+Este diagrama de paquetes representa la estructura general de un sistema de restaurante, dividiendo sus componentes en tres paquetes principales: Modelo, Servicios y Base de Datos. Aquí está la explicación de cada paquete y sus interacciones:
+
+1. *Paquete "Modelo"*: contiene las clases que representan las entidades principales del sistema. Estas clases contienen atributos que describen los datos asociados a cada entidad:
+   - *Plato*: describe un plato del menú, con atributos como ID_Plato, Nombre, Descripción, Precio, y Foto.
+   - *Detalle_Orden*: representa los detalles de cada plato en una orden, con atributos como ID_Detalle, ID_Orden, ID_Plato, Cantidad, y varios booleanos para indicar opciones como Sopa, Postre, Domicilio, y Recipiente.
+   - *Orden*: representa una orden realizada por un cliente, con atributos como ID_Orden, ID_Mesa, HoraPedido, y Total.
+   - *Mesa*: describe una mesa en el restaurante, con atributos como ID_Mesa, Numero_Mesa, Capacidad, y Estado.
+   - *Usuario*: representa a un usuario del sistema, con ID_Usuario, Nombre, Teléfono, y Dirección.
+   - *Factura*: representa una factura generada a partir de una orden, con atributos como ID_Factura, ID_Orden, Fecha, Total, y MetodoPago.
+
+2. *Paquete "Servicios"*: contiene las clases de servicio que manejan la lógica de negocio asociada a cada entidad:
+   - *PlatoService*: gestiona las operaciones relacionadas con los platos.
+   - *OrdenService*: maneja las operaciones de las órdenes.
+   - *DetalleOrdenService*: gestiona los detalles específicos de cada orden.
+   - *UsuarioService*: maneja la información de los usuarios.
+   - *FacturaService*: gestiona las operaciones relacionadas con las facturas.
+
+3. *Paquete "Base de Datos"*: contiene la clase Database, que representa la base de datos donde se almacenan todas las entidades del sistema.
+
+### Interacciones entre Paquetes
+
+- *"Modelo" → "Servicios"*: El paquete Modelo es utilizado por el paquete Servicios, lo que significa que los servicios manejan las instancias de las clases del modelo (por ejemplo, OrdenService puede crear y actualizar objetos de la clase Orden).
+
+- *"Servicios" → "Base de Datos"*: Los servicios acceden a la base de datos para realizar operaciones de lectura y escritura.
+
+- *"Modelo" → "Base de Datos"*: El paquete Modelo se almacena en la Base de Datos, lo que significa que las clases del modelo representan las entidades que se guardan en la base de datos.
+
 ### Diagramas de Perfil
 ---
+```js
+@startuml
+
+package "Perfil Restaurante" {
+    class Plato {
+        - Nombre : string
+        - Descripción : string
+        - Precio : decimal
+        - Foto : string
+      
+    }
+
+    class Orden <<stereotype>> {
+        - ID_Orden : int
+        - HoraPedido : datetime
+        - Total : decimal
+    }
+
+    class Usuario <<stereotype>> {
+        - Nombre : string
+        - Teléfono : string
+        - Dirección : string
+    }
+
+    
+    Plato --> Orden : "incluye"
+    Usuario --> Orden : "realiza"
+}
+
+@enduml
+```
+
+![perfil](/All/Images_Diagrams/Perfil.png)
+
+### Elementos del Diagrama:
+
+1. *Clases*:
+   - *Plato*: Define los platos del menú con atributos como:
+     - Nombre: El nombre del plato.
+     - Descripción: Una breve descripción del plato.
+     - Precio: Costo del plato.
+     - Foto: URL o referencia a una imagen del plato.
+
+   - *Orden*: Representa una orden hecha por un usuario, con atributos como:
+     - ID_Orden: Identificador único de la orden.
+     - HoraPedido: Marca de tiempo que indica cuándo se realizó el pedido.
+     - Total: Monto total de la orden.
+
+   - *Usuario*: Representa a los clientes del restaurante, con atributos como:
+     - Nombre: Nombre del usuario.
+     - Teléfono: Número de contacto.
+     - Dirección: Dirección del usuario.
+
+2. *Estereotipos*:
+   - El estereotipo aplicado a la clase Orden y Usuario indica que estas clases tienen características específicas en el contexto del restaurante, pero no se definen roles adicionales en este diagrama.
+
+### Relaciones:
+
+- Plato --> Orden: La relación "incluye" indica que una orden puede contener uno o más platos. Esto refleja la naturaleza de un sistema de pedidos, donde un cliente puede pedir varios platos a la vez.
+
+- Usuario --> Orden: La relación "realiza" indica que un usuario (cliente) puede realizar una o más órdenes. Esto muestra que cada pedido está asociado con un cliente específico.
+
+El diagrama de perfil representa las clases principales de un sistema de restaurante, sus atributos y las relaciones entre ellos. Es útil para entender la estructura del sistema y cómo interactúan los diferentes componentes en el proceso de realizar pedidos.
