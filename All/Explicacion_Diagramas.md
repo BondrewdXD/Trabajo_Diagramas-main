@@ -18,7 +18,7 @@
 ---
 ### Diagramas de Clases
 ---
-js
+```js
 @startuml Clases
 
 class Plato {
@@ -77,7 +77,7 @@ Usuario  o--  Orden : realiza >
 Factura  -- Orden : se genera para >
 
 @enduml
-
+```
 ### Diagramas de Componentes
 ---
 ### Diagramas de Despliegue
