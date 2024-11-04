@@ -35,7 +35,7 @@ stop
 @enduml
 ```
 
-![actividad](/All/Images_Diagrams/Actividad.png)
+![alt text](image.png)
 
 # Diagrama Comportamental de Actividad: Proceso de Servicio en un Restaurante
 
@@ -98,7 +98,7 @@ rectangle "Sistema de Pedido" {
 @enduml
 ```
 
-![comportamental](/All/Images_Diagrams/Comportamental.png)
+![alt text](image-1.png)
 
 # Diagrama de Comunicación: Proceso de Pedido en un Restaurante
 
@@ -198,7 +198,7 @@ end
 @enduml
 ```
 
-![secuencia](/All/Images_Diagrams/Secuencia.png)
+![alt text](image-2.png)
 
 # Diagrama de Secuencia: Proceso de Pedido en un Restaurante
 
@@ -279,7 +279,7 @@ GeneraFactura --> [*] : Factura generada
 @enduml
 ```
 
-![estado](/All/Images_Diagrams/estado-transicion.png)
+![alt text](image-3.png)
 
 # Diagrama de Estados y Transiciones: Proceso de Pedido en un Restaurante
 
@@ -380,7 +380,7 @@ note right of Sistema : t11: Envia factura detallada
 @enduml
 ```
 
-![tiempo](/All/Images_Diagrams/Tiempo.png)
+![alt text](image-4.png)
 
 # Diagrama de Tiempo del Sistema de Restaurante
 
@@ -472,7 +472,7 @@ package "Restaurante" {
 @enduml
 ```
 
-![casouso](/All/Images_Diagrams/Casos_De_Uso.png)
+![alt text](image-5.png)
 
 # Diagrama de Casos de Uso: Sistema de Restaurante
 
@@ -591,7 +591,7 @@ Factura  -- Orden : se genera para >
 @enduml
 ```
 
-![clases](/All/Images_Diagrams/Class_Diagram.png)
+![alt text](image-6.png)
 
 Este diagrama de clases representa la estructura de un sistema de gestión de restaurante, mostrando las principales entidades y sus relaciones. A continuación, se describen cada una de las clases y sus atributos, así como las relaciones entre ellas.
 
@@ -752,7 +752,7 @@ package "Sistema de Restaurante" {
 @enduml
 ```
 
-![componentes](/All/Images_Diagrams/Componentes.png)
+![alt text](image-7.png)
 
 Este diagrama de componentes representa un sistema de restaurante que organiza sus servicios en módulos específicos para gestionar platos, órdenes, detalles de órdenes, usuarios y facturas. A continuación, se detallan los roles y las interacciones entre los componentes:
 
@@ -807,7 +807,7 @@ node "Cliente" {
 ```
 
 
-![despliege](/All/Images_Diagrams/Despliegue.png)
+![alt text](image-8.png)
 
 Este diagrama de despliegue muestra cómo los componentes de un sistema de restaurante están distribuidos en diferentes nodos, específicamente un Servidor de Aplicación, una Base de Datos, y un Cliente que representa la interfaz de usuario. Aquí están los detalles de cada nodo y sus interacciones:
 
@@ -887,7 +887,7 @@ detalleOrden -- plato : "incluye el plato"
 @enduml
 ```
 
-![objetos](/All/Images_Diagrams/Objetos.png)
+![alt text](image-9.png)
 
 Este diagrama de objetos muestra instancias específicas de las entidades de un sistema de restaurante, con atributos que representan información detallada en un momento dado. A continuación, se describen los objetos y sus relaciones:
 
@@ -1002,7 +1002,7 @@ package "Base de Datos" {
 @enduml
 ```
 
-![paquetes](/All/Images_Diagrams/Paquetes.png)
+![alt text](image-10.png)
 
 Este diagrama de paquetes representa la estructura general de un sistema de restaurante, dividiendo sus componentes en tres paquetes principales: Modelo, Servicios y Base de Datos. Aquí está la explicación de cada paquete y sus interacciones:
 
@@ -1065,7 +1065,7 @@ package "Perfil Restaurante" {
 @enduml
 ```
 
-![perfil](/All/Images_Diagrams/Perfil.png)
+![alt text](image-11.png)
 
 ### Elementos del Diagrama:
 
