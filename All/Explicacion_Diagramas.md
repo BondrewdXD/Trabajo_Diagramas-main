@@ -35,7 +35,7 @@ stop
 @enduml
 ```
 
-![alt text](image.png)
+![actividad](/All/Images_Diagrams/Actividad.png)
 
 # Diagrama Comportamental de Actividad: Proceso de Servicio en un Restaurante
 
