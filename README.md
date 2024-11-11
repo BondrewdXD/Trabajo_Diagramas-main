@@ -1,5 +1,5 @@
 # Trabajo Diagramas
-## Este repositorio pertenece al trabajo realizado por Jose Miguel Vera Garzón & Maria Juliana Ferro Bonilla
+## Este repositorio pertenece al trabajo realizado por Jose Miguel Vera Garzón & Maria Juliana Ferro Bonilla & María Sofia Aljure Herrera
 ---
 # Sistema de Gestión de Restaurante
 
